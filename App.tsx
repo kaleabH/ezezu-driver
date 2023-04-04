@@ -1,12 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import {Provider as PaperProvider} from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import BottomNavigator from './navigations/BottomNavigator';
+import {createContext} from 'react';
+import { Order } from './types';
+import { orders } from './Data';
+const OrderContext = createContext<Order[]| null>(null);
+
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <OrderContext.Provider value={orders}>
+    <PaperProvider>
+    <NavigationContainer>
+      <BottomNavigator/>
+    </NavigationContainer>
+    </PaperProvider>
+    </OrderContext.Provider>
   );
 }
 
