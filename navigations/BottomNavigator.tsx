@@ -10,7 +10,13 @@ interface Props{
 
 }
 
-
+interface Props {
+  name: string;
+  profilePicUrl: string;
+  rating: number;
+  deliveryCount: number;
+  onLogoutPress: () => void;
+}
 
 
 const BottomTab = createBottomTabNavigator<BottomTabParamsList>();
