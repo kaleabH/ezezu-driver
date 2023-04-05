@@ -11,6 +11,7 @@ export const orders: Order[] = [
            
             longitude: "38.76743372367542",
             latitude: " 9.005319815202018",
+            
         },
         orderedAt: new Date(),
         orderStatus: "pending"
@@ -32,8 +33,8 @@ export const orders: Order[] = [
         customerId: uuid.v4(),
         driverId:dId,
         location: {
-            longitude: "",
-            latitude: "",
+            longitude: "38.6466",
+            latitude: "9.0321",
         },
         orderedAt: new Date(),
         orderStatus: "delivered"
@@ -43,8 +44,8 @@ export const orders: Order[] = [
         customerId: uuid.v4(),
         driverId:dId,
         location: {
-            longitude: "",
-            latitude: "",
+            longitude: "38.7866",
+            latitude: "9.0325",
         },
         orderedAt: new Date(),
         orderStatus: "not-delivered"
@@ -54,8 +55,8 @@ export const orders: Order[] = [
         customerId: uuid.v4(),
         driverId:dId,
         location: {
-            longitude: "",
-            latitude: "",
+            longitude: "38.6466",
+            latitude: "9.0342",
         },
         orderedAt: new Date(),
         orderStatus: "not-delivered"
