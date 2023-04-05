@@ -1,9 +1,10 @@
 import React,{useContext, useEffect} from 'react'
 import { BottomTabBarProps, BottomTabParamsList } from '../types'
-import { View, FlatList, StyleSheet, Text } from 'react-native'
+import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { OrderContext } from '../context/orderContext'
 import Card from '../components/Card'
 import { useIsFocused } from '@react-navigation/native';
+import MapModal from '../components/MapModal'
 
 
 const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders">>= ({route, navigation}) => {
@@ -36,6 +37,16 @@ const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders"
     </View>
       )}
     </Card>
+       <View style={styles.buttoncontainer}>
+        
+        <TouchableOpacity style={styles.button}>
+            <MapModal />
+        </TouchableOpacity>
+      </View>
+{/* 
+      <View style={{ flex: 1 }}>
+        <MapModal />
+    </View> */}
     </View>
   )
 }
@@ -56,8 +67,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems:"center",
-    width: "70%"
-  }
+    width: "70%",
+    padding: 10,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+
+  buttoncontainer: {
+    position: 'absolute',
+    bottom: -650,
+    left: 0,
+    right: 20,
+    alignItems: 'flex-end',
+  },
+  button: {
+    borderRadius: 25,
+    backgroundColor: "#229865",
+    height: 50,
+    width: '60%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+  },
 })
 
 export default ActiveOrders

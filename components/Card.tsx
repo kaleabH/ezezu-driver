@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderRadius: 8,
     backgroundColor: "#FFFFFF",
+    
         // marginVertical: 20
       },
 })
