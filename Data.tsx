@@ -8,8 +8,9 @@ export const orders: Order[] = [
         customerId: uuid.v4(),
         driverId:dId,
         location: {
-            longitude: "",
-            latitude: "",
+           
+            longitude: "38.76743372367542",
+            latitude: " 9.005319815202018",
         },
         orderedAt: new Date(),
         orderStatus: "pending"
@@ -19,8 +20,9 @@ export const orders: Order[] = [
         customerId: uuid.v4(),
         driverId:dId,
         location: {
-            longitude: "",
-            latitude: "",
+           
+            longitude: " 38.7676390423133",
+            latitude: " 9.003784257841234",
         },
         orderedAt: new Date(),
         orderStatus: "pending"
