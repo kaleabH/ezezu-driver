@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react'
 import { Text,View, FlatList, StyleSheet } from 'react-native'
 import { BottomTabBarProps, BottomTabParamsList } from '../types'
 import Card from '../components/Card'
-import { OrderContext } from '../context/ordercontext'
+import { OrderContext } from '../context/orderContext'
 import { useIsFocused } from '@react-navigation/native';
 
 const OrderHistory:React.FC<BottomTabBarProps<BottomTabParamsList,"OrderHistory">>= ({route, navigation}) => {

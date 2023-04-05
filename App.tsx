@@ -5,7 +5,7 @@ import {Provider as PaperProvider} from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import BottomNavigator from './navigations/BottomNavigator';
 import { orders } from './Data';
-import { OrderContext } from './context/ordercontext';
+import { OrderContext } from './context/orderContext'
 import 'react-native-get-random-values'
 import { Actions, Order } from './types';
 

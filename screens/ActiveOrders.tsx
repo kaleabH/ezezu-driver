@@ -1,7 +1,7 @@
 import React,{useContext, useEffect} from 'react'
 import { BottomTabBarProps, BottomTabParamsList } from '../types'
 import { View, FlatList, StyleSheet, Text } from 'react-native'
-import { OrderContext } from '../context/ordercontext'
+import { OrderContext } from '../context/orderContext'
 import Card from '../components/Card'
 import { useIsFocused } from '@react-navigation/native';
 
