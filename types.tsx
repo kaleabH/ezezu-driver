@@ -17,9 +17,9 @@ export type BottomTabParamsList = {
 //   }
   
 export  type Actions = "pending"
-                 | "delivered"| "not-delivered"| any
+                 | "delivered"| "not-delivered"
 
-type dispatch = React.Dispatch<Actions>
+// type dispatch = React.Dispatch<Actions|null>
 export type BottomTabBarProps<T extends ParamListBase, K  extends keyof T> = BottomTabScreenProps<T, K>
 
 export interface Order {
@@ -27,8 +27,8 @@ export interface Order {
     customerId: string;
     driverId:string| null;
     location: {
-        longitude: string;
-        latitude: string;
+        latitude: number;
+        longitude: number;
     }
     orderedAt: Date;
     orderStatus: "pending"| "delivered"|"not-delivered";

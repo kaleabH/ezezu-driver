@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderColor: "black",
         borderRadius: 8,
-    backgroundColor: "#FFFFFF",
-        // marginVertical: 20
+        backgroundColor: "#FFFFFF",
       },
 })
 

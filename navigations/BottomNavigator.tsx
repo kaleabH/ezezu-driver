@@ -5,13 +5,10 @@ import ActiveOrders from '../screens/ActiveOrders';
 import Profile from '../screens/Profile';
 import OrderHistory from '../screens/OrderHistory';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { OrderContext } from '../context/ordercontext';
+import { OrderContext } from '../context/orderContext';
 interface Props{
 
 }
-
-
-
 
 const BottomTab = createBottomTabNavigator<BottomTabParamsList>();
 const BottomNavigator:React.FC<Props> = () => {
@@ -48,7 +45,9 @@ const BottomNavigator:React.FC<Props> = () => {
         <BottomTab.Screen
            name="OrderHistory"
            component={OrderHistory}
+
            options={
+            
             {
             title:"Order History",
             tabBarIcon: ({color})=>(

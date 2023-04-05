@@ -1,17 +1,18 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { Text,View, FlatList, StyleSheet } from 'react-native'
 import { BottomTabBarProps, BottomTabParamsList } from '../types'
 import Card from '../components/Card'
-import { OrderContext } from '../context/ordercontext'
+import { OrderContext } from '../context/orderContext';
 import { useIsFocused } from '@react-navigation/native';
 
 const OrderHistory:React.FC<BottomTabBarProps<BottomTabParamsList,"OrderHistory">>= ({route, navigation}) => {
- const {state, dispatch} = useContext(OrderContext)
+ const state = useContext(OrderContext)
+ const [orders, setOrders] = useState(state);
  const isFocused = useIsFocused();
   useEffect(()=>{
-  dispatch?.("delivered");
-  // dispatch?.("not-delivered")
-  console.log(state)
+  setOrders(state.filter(order=>(order.orderStatus !=="pending")))
+  // setOrders(prevOrders=>({...prevOrders,...state.filter(order=>(order.orderStatus ==="not-delivered"))}))
+  console.log(orders)
   },[isFocused])
   return (
     <View style={styles.container}>
@@ -21,11 +22,12 @@ const OrderHistory:React.FC<BottomTabBarProps<BottomTabParamsList,"OrderHistory"
     <View style={style}>
       <FlatList
       style={styles.flatList}
-  data={state}
+  data={orders}
   renderItem={
     ({item}) => (
       <View style={styles.listItem}>
         <Text>{item.customerId.substring(0,8)}</Text>
+        <Text>{item.orderedAt.toDateString()}</Text>
         <Text style={{color: item.orderStatus==="delivered" ? "green": "red"}}>{item.orderStatus}</Text>
       </View>
     )
@@ -56,7 +58,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems:"center",
-    width: "70%"
+    width: 300,
+    padding: 10,
+    marginVertical: 8,
+    marginHorizontal: 16,
   }
 })
 export default OrderHistory

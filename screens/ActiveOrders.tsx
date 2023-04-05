@@ -1,18 +1,28 @@
-import React,{useContext, useEffect} from 'react'
+import React,{useContext, useEffect, useState} from 'react'
 import { BottomTabBarProps, BottomTabParamsList } from '../types'
-import { View, FlatList, StyleSheet, Text } from 'react-native'
-import { OrderContext } from '../context/ordercontext'
+import { View, TouchableOpacity, FlatList, StyleSheet, Text } from 'react-native'
+import { OrderContext } from '../context/orderContext';
 import Card from '../components/Card'
 import { useIsFocused } from '@react-navigation/native';
+import {FAB } from 'react-native-paper';
+import MapModal from '../components/MapModal';
 
+const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders">>= ({route, navigation,}) => {
+  const state = useContext(OrderContext)
+ const [orders, setOrders] = useState(state);
+ const [modalVisible, setModalVisible] = useState(false);
+ const [modalOrders, setModalOrders] = useState(orders)
 
-const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders">>= ({route, navigation}) => {
-  const {state, dispatch} = useContext(OrderContext)
+ const [isExtended, setIsExtended] = React.useState(true);
+//  const fabStyle = { [animateFrom]: 16 };
+
   const isFocused = useIsFocused();
 
-  // console.log(navigation.getState)
   useEffect(()=>{
-    dispatch?.("pending");
+  setOrders(state.filter(order=>order.orderStatus ==="pending"))
+
+  setModalOrders(orders)
+
   },[isFocused])
   return (
     <View style={styles.container}>
@@ -22,13 +32,20 @@ const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders"
     <View style={style}>
       <FlatList
       style={styles.flatList}
-  data={state}
+  data={orders}
   renderItem={
     ({item}) => (
-      <View style={styles.listItem}>
+      <TouchableOpacity 
+      onPress={
+        ()=>{
+          setModalOrders([item])
+          setModalVisible(true) 
+           }
+         }
+       style={styles.listItem}>
         <Text>{item.customerId.substring(0,8)}</Text>
         <Text style={{color: "green"}}>{item.orderStatus}</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
   keyExtractor={item => item.orderId}
@@ -36,6 +53,16 @@ const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders"
     </View>
       )}
     </Card>
+    <FAB
+        icon={'map-marker-outline'}
+        color={'white'}
+        onPress={() =>{ 
+          setModalOrders(orders)
+          setModalVisible(true)
+        }}
+        style={[styles.fabStyle]}
+      />
+      <MapModal modalVisible={modalVisible} setModalVisible={setModalVisible} orders={modalOrders}/>
     </View>
   )
 }
@@ -52,11 +79,21 @@ const styles = StyleSheet.create({
   flatList:{
     width:"100%"
   },
+  fabStyle: {
+    top:430,
+    left:210,
+    position: 'absolute',
+    backgroundColor: "#229865",
+    color:"white"
+  },
   listItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems:"center",
-    width: "70%"
+    width: "70%",
+    padding: 10,
+    marginVertical: 8,
+    marginHorizontal: 16,
   }
 })
 
