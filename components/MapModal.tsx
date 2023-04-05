@@ -5,10 +5,10 @@ import MapView, { Marker, Region } from 'react-native-maps';
 const MapModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [mapRegion, setMapRegion] = useState<Region>({
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitude: 9.0321,
+    longitude: 38.7466,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01,
   });
 
   const handlePress = () => {
