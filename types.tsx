@@ -8,6 +8,18 @@ export type BottomTabParamsList = {
     Profile: undefined;
 }
 
+// export interface ActiveOrdersType extends Order{
+//     orderStatus: "pending"
+//   }
+  
+// export interface OrderHistoryType extends Order{
+//     orderStatus: "delivered" | "not-delivered"
+//   }
+  
+export  type Actions = "pending"
+                 | "delivered"| "not-delivered"| any
+
+type dispatch = React.Dispatch<Actions>
 export type BottomTabBarProps<T extends ParamListBase, K  extends keyof T> = BottomTabScreenProps<T, K>
 
 export interface Order {

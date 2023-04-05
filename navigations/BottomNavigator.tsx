@@ -1,18 +1,24 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import React from 'react'
-import { BottomTabParamsList } from '../types';
+import React, {useReducer, useContext} from 'react';
+import { BottomTabParamsList, Order, Actions } from '../types';
 import ActiveOrders from '../screens/ActiveOrders';
 import Profile from '../screens/Profile';
 import OrderHistory from '../screens/OrderHistory';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { OrderContext } from '../context/ordercontext';
 interface Props{
 
 }
 
+
+
+
 const BottomTab = createBottomTabNavigator<BottomTabParamsList>();
 const BottomNavigator:React.FC<Props> = () => {
+
   return (
     <BottomTab.Navigator
+    initialRouteName='OrderHistory'
         screenOptions={{
          headerStyle:{
             backgroundColor:"#229865",
@@ -30,7 +36,6 @@ const BottomNavigator:React.FC<Props> = () => {
         <BottomTab.Screen
            name="ActiveOrders"
            component={ActiveOrders}
-           initialParams={}
            options={
             {
             title:"Active Orders",
@@ -43,7 +48,6 @@ const BottomNavigator:React.FC<Props> = () => {
         <BottomTab.Screen
            name="OrderHistory"
            component={OrderHistory}
-           initialParams={}
            options={
             {
             title:"Order History",
