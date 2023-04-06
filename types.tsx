@@ -16,10 +16,10 @@ export type BottomTabParamsList = {
 //     orderStatus: "delivered" | "not-delivered"
 //   }
   
-export  type Actions = "pending"
-                 | "delivered"| "not-delivered"
+export  type Actions = {type:"pending"; orderId: string;}
+                 |{type:"delivered"; orderId:string;}| {type: "not-delivered"; orderId: string;}
 
-// type dispatch = React.Dispatch<Actions|null>
+export type Dispatch = React.Dispatch<Actions|null>
 export type BottomTabBarProps<T extends ParamListBase, K  extends keyof T> = BottomTabScreenProps<T, K>
 
 export interface Order {

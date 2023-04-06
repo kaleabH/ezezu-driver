@@ -4,7 +4,7 @@ import { View, TouchableOpacity, FlatList, StyleSheet, Text } from 'react-native
 import { OrderContext } from '../context/orderContext';
 import Card from '../components/Card'
 import { useIsFocused } from '@react-navigation/native';
-import {FAB } from 'react-native-paper';
+import {FAB,Dialog, Portal, Button, RadioButton} from 'react-native-paper';
 import MapModal from '../components/MapModal';
 
 const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders">>= ({route, navigation,}) => {
@@ -12,11 +12,17 @@ const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders"
  const [orders, setOrders] = useState(state);
  const [modalVisible, setModalVisible] = useState(false);
  const [modalOrders, setModalOrders] = useState(orders)
+ const [checked, setChecked] = React.useState('first');
 
- const [isExtended, setIsExtended] = React.useState(true);
+//  const [isExtended, setIsExtended] = React.useState(true);
 //  const fabStyle = { [animateFrom]: 16 };
 
   const isFocused = useIsFocused();
+  const [visible, setVisible] = React.useState(false);
+
+  const showDialog = () => setVisible(true);
+
+  const hideDialog = () => setVisible(false);
 
   useEffect(()=>{
   setOrders(state.filter(order=>order.orderStatus ==="pending"))
@@ -62,6 +68,27 @@ const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders"
         }}
         style={[styles.fabStyle]}
       />
+       {/* <Button onPress={showDialog}>Show Dialog</Button> */}
+        <Portal>
+          <Dialog visible={visible} onDismiss={hideDialog}>
+            <Dialog.Title>Order Action</Dialog.Title>
+            <Dialog.Content>
+            <RadioButton
+                value="first"
+                status={ checked === 'first' ? 'checked' : 'unchecked' }
+                onPress={() => setChecked('first')}
+             />
+            <RadioButton
+               value="second"
+               status={ checked === 'second' ? 'checked' : 'unchecked' }
+             onPress={() => setChecked('second')}
+            />
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button onPress={hideDialog}>Done</Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
       <MapModal modalVisible={modalVisible} setModalVisible={setModalVisible} orders={modalOrders}/>
     </View>
   )
