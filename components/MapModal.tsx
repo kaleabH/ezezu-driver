@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, Button,TouchableOpacity,StyleSheet } from 'react-native';
-import MapView, { Marker, Region } from 'react-native-maps';
+import MapView, { Marker, Region,PROVIDER_GOOGLE } from 'react-native-maps';
 import { Order } from '../types';
 
 interface Props{
@@ -36,6 +36,7 @@ const MapModal:React.FC<Props> = ({modalVisible, setModalVisible,orders}) => {
       <Modal animationType="slide" transparent={false} visible={modalVisible}>
         <View style={{ flex: 1 }}>
           <MapView
+            provider={PROVIDER_GOOGLE}
             style={{ flex: 1, height: '50%',width: '100%' }}
             region={mapRegion}
             onRegionChange={handleMapRegionChange}
