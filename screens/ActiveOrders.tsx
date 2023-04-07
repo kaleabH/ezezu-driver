@@ -8,11 +8,13 @@ import {FAB,Dialog, Portal, Button, RadioButton} from 'react-native-paper';
 import MapModal from '../components/MapModal';
 
 const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders">>= ({route, navigation,}) => {
-  const state = useContext(OrderContext)
+  const {state, dispatch} = useContext(OrderContext)
  const [orders, setOrders] = useState(state);
  const [modalVisible, setModalVisible] = useState(false);
  const [modalOrders, setModalOrders] = useState(orders)
- const [checked, setChecked] = React.useState('first');
+ const [checked, setChecked] = useState('first');
+ const [selectedOrder, setSelectedOrder] = useState<string>("");
+ const [selectedAction, setSelectedAction] = useState<"pending"| "delivered"| "not-delivered">("pending");
 
 //  const [isExtended, setIsExtended] = React.useState(true);
 //  const fabStyle = { [animateFrom]: 16 };
@@ -45,7 +47,9 @@ const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders"
       onPress={
         ()=>{
           setModalOrders([item])
-          setModalVisible(true) 
+          // setModalVisible(true) 
+          setSelectedOrder(item.orderId)
+          showDialog()
            }
          }
        style={styles.listItem}>
@@ -64,7 +68,7 @@ const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders"
         color={'white'}
         onPress={() =>{ 
           setModalOrders(orders)
-          setModalVisible(true)
+          
         }}
         style={[styles.fabStyle]}
       />
@@ -73,19 +77,38 @@ const ActiveOrders:React.FC<BottomTabBarProps<BottomTabParamsList,"ActiveOrders"
           <Dialog visible={visible} onDismiss={hideDialog}>
             <Dialog.Title>Order Action</Dialog.Title>
             <Dialog.Content>
+              <View style={{flexDirection: "row", alignItems: "center"}}>
             <RadioButton
                 value="first"
                 status={ checked === 'first' ? 'checked' : 'unchecked' }
-                onPress={() => setChecked('first')}
+                onPress={() => {
+                  setChecked('first')
+                  setSelectedAction("delivered")
+              }}
              />
+             <Text>deliver order</Text>
+              </View>
+              <View style={{flexDirection: "row", alignItems: "center"}}>
             <RadioButton
                value="second"
                status={ checked === 'second' ? 'checked' : 'unchecked' }
-             onPress={() => setChecked('second')}
+             onPress={() => {
+              setChecked('second')
+              setSelectedAction("not-delivered")
+            }}
             />
+            <Text>dismiss order</Text>
+              </View>
+              <Button onPress={()=>{
+                hideDialog()
+                setModalVisible(true)
+                }}>show in map</Button>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={hideDialog}>Done</Button>
+              <Button onPress={()=>{
+                hideDialog()
+                dispatch?.({type: selectedAction, orderId: selectedOrder})
+              }}>Done</Button>
             </Dialog.Actions>
           </Dialog>
         </Portal>

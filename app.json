@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#229865"
-      }
+      },
+      "package": "com.kaleabhaliu.ezezudriver"
     },
     "web": {
       "favicon": "./assets/favicon.png"

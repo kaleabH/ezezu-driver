@@ -1,5 +1,6 @@
 import { ParamListBase} from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { SetStateAction } from "react";
 
 
 export type BottomTabParamsList = {
@@ -16,10 +17,10 @@ export type BottomTabParamsList = {
 //     orderStatus: "delivered" | "not-delivered"
 //   }
   
-export  type Actions = {type:"pending"; orderId: string;}
-                 |{type:"delivered"; orderId:string;}| {type: "not-delivered"; orderId: string;}
+export  type Actions = {type:"pending"; orderId:string|Dispatch<SetStateAction<string>>;}
+                 |{type:"delivered"; orderId:string|Dispatch<SetStateAction<string>>;}| {type: "not-delivered"; orderId: string|Dispatch<SetStateAction<string>>;}
 
-export type Dispatch = React.Dispatch<Actions|null>
+export type Dispatch<T> = React.Dispatch<T>
 export type BottomTabBarProps<T extends ParamListBase, K  extends keyof T> = BottomTabScreenProps<T, K>
 
 export interface Order {

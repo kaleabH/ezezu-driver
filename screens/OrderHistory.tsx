@@ -6,7 +6,7 @@ import { OrderContext } from '../context/orderContext';
 import { useIsFocused } from '@react-navigation/native';
 
 const OrderHistory:React.FC<BottomTabBarProps<BottomTabParamsList,"OrderHistory">>= ({route, navigation}) => {
- const state = useContext(OrderContext)
+ const {state, dispatch} = useContext(OrderContext)
  const [orders, setOrders] = useState(state);
  const isFocused = useIsFocused();
   useEffect(()=>{

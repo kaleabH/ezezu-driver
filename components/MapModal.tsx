@@ -14,7 +14,7 @@ const MapModal:React.FC<Props> = ({modalVisible, setModalVisible,orders}) => {
     latitude: 8.9945118,
     longitude: 38.7942374,
     latitudeDelta: 0.00922,
-    longitudeDelta: 0.00421,
+    longitudeDelta: 0.00391,
   });
 
   const handlePress = () => {
@@ -42,11 +42,11 @@ const MapModal:React.FC<Props> = ({modalVisible, setModalVisible,orders}) => {
           >
             {
                 orders.map(order=>(
-                    <Marker key={order.orderId} coordinate={{ latitude: order.location.latitude, longitude:order.location.longitude }} />
+                    <Marker onPress={()=>{console.log('marker pressed!')}} key={order.orderId} coordinate={{ latitude: order.location.latitude, longitude:order.location.longitude }} />
                 ))
             }
           </MapView>
-          <Button title="Close Map" onPress={() => setModalVisible(false)} />
+          <Button color="#229865" title="Close Map" onPress={() => setModalVisible(false)} />
           
         </View>
       </Modal>
